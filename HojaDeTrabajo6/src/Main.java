@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * @author Juan Manuel Marroquin Alfaro, Javier Alejandro Cotto Argueta
  * @param <opcion>
@@ -7,119 +5,111 @@ import java.util.*;
  * @date 11/03/19
  * @name Factory.java
  **/
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Main {
+    public static void main(String [] args){
+        Scanner read = new Scanner(System.in);
+        String tipoM;
+        String line;
+        Map mapa1;
+        Map mapa2;
+        Coleccion cartasTotales =  new Coleccion();
+        Coleccion coleccion = new Coleccion();
+        Boolean continuar = true;
+        
+        System.out.println("Ingrese la implementacion que desea usar: ");
+        System.out.println("1. HashMap");
+        System.out.println("2. TreeMap");
+        System.out.println("3. LinkedHashMap");
+        tipoM = read.next();
+        
+        mapa1 = Factory.obtenerMap(tipoM);
+        mapa2 = Factory.obtenerMap(tipoM);
+        if (mapa1 != null && mapa2 != null){
+            cartasTotales.AsignarMapa(mapa1);
+            coleccion.AsignarMapa(mapa2);
+            
+            //Leer el archivo
+            ArrayList<String> cartas = new ArrayList<>();
+            try {
+                Stream<String> lines;
+                lines = Files.lines(Paths.get("cards_desc.txt"), StandardCharsets.UTF_8);
+                lines.forEach(cartas::add);
+                /**try (BufferedReader abc = new BufferedReader(new FileReader("cards_desc.txt"))) {
+                    while(abc.ready()){
+                        cartas.add(abc.readLine());
+                    }
+                    while((line = abc.readLine()) != null) {
+                        cartas.add(line);
+                    }
+                    abc.close();
+                    //Stream<String> lines;
+                    //lines = Files.lines(Paths.get("cards_desc.txt"), StandardCharsets.UTF_8);
+                    //lines.forEach(cartas::add);
+                }*/
+            } catch (IOException e) {
+                System.out.println("Ha ocurrido un error");
+            }
 
-	public static void main(String [] args) {
-		//Listas a utilizar
-		ArrayList<String> nombreCartas = new ArrayList<String>();
-		ArrayList<String> type = new ArrayList<String>();
-		Map<String, String> map = null;
-		
-		//Variables a utilizar
-    	Scanner sc = new Scanner(System.in);
-    	String input = null;
-		Factory factory = new Factory();
-		int opc;
-		Iterator<String> ite;
-		String nombre;
-		String tipo;
-		boolean valido = false;
-    	Reader file = new Reader();
-    	
-    	//Encabezado
-    	System.out.println("_____-----Hoja de Trabajo #6-----_____\n");
-    	System.out.println("Que implementación de MAP quiere utilizar\n");
-    	System.out.println("1. HashMap, 2. TreeMap, 3. LinkedHashMap");
-    	input = sc.nextLine();
-    	Factory.obtenerMap(input);
-    	
-    	//Separar el nombre de las cartas
-    	nombreCartas = Reader.Reader();
-    	
-    	//Separar el tipo de la carta
-    	type = Reader.Reader2();
-    	
-    	//Mostrar el map con un iterador
-    	ite = map.keySet().iterator();
-    	while(ite.hasNext()) {
-    		String key = ite.next();
-    		System.out.println("Nombre Carte; " + key + " Tipo: " + map.get(key));
-    		
-    	System.out.println("\n FIN Ejecución del Arbol \n");
-    	
-    	
-    	//Menu de opciones disponibles
-    	System.out.println("_____-----MENU-----_____\n");
-        System.out.println("1. Agregar una carta a la coleccion");
-        System.out.println("2. Mostrar el tipo de una carta específica en la coleccion");
-        System.out.println("3. Mostrar el nombre, tipo y cantidad de cada cartas en la coleccion");
-        System.out.println("4. Mostrar el nombre, tipo y cantidad de cada cartas que tiene en su colección, ordenadas por tipo.");
-        System.out.println("5. Mostrar el nombre y tipo de todas las cartas existentes.");
-    	System.out.println("6. Mostrar el nombre y tipo de todas las cartas existentes, ordenadas por tipo.");
-    	System.out.println("Seleccione una opción");
-    	opc = sc.nextInt();
-    	 
-    	//Llamar metodos de cada opción
-    	if(opc == 1) {
-    		
-    	}
-    	
-    	if(opc == 2) {
-    		
-    	}
-    	
-    	if(opc == 3) {
-	
-    	}
-    	
-    	if (opc == 4) {
-
-			System.out.println("4. Mostrar el nombre, tipo y cantidad de cada cartas que tiene en su coleccion, ordenadas por tipo.");
-			for(int i=0; i<nombreCartas.size();i++){
-				map.put(nombreCartas.get(i),type.get(i));
-			}
-			ite = map.keySet().iterator();
-			while(ite.hasNext()){
-				String key1 = ite.next();
-				System.out.println("Tipo: (" + key1 + ") -> Nombre Carta: (" + map.get(key1)+")");     
-			}
-			System.out.println("Hay: "+map.size() + " cartas en su coleccion");
-
-	   }
-
-	   if (opc == 5) {
-
-			System.out.println("5. Mostrar el nombre y tipo de todas las cartas existentes.");
-			for(int i=0; i<nombreCartas.size();i++){
-				map.put(nombreCartas.get(i),type.get(i));
-			}
-
-			ite = map.keySet().iterator();
-			while(ite.hasNext()){
-			   String key1 = ite.next();
-			   System.out.println("Nombre Carta: " + key1 + " -> Tipo: " + map.get(key1));
-			}
-
-			System.out.println("---------------------------------");   
-	   }
-
-	   if (opc == 6) {
-			System.out.println("6. Mostrar el nombre y tipo de todas las cartas existentes, ordenadas por tipo.");
-
-			Collections.sort(type);
-			for(int i=0; i<nombreCartas.size();i++){
-				map.put(nombreCartas.get(i),type.get(i));
-			}
-			
-			ite = map.keySet().iterator();
-			while(ite.hasNext()){
-				String key1 = ite.next();
-				System.out.println("Nombre Carta: " + key1 + " -> Tipo: " + map.get(key1));   
-		   }
-		}
-    	}
-    	
-	}
-	
+            for (String c: cartas) {
+                String[] cartaInfo = c.split("[|]");
+                cartasTotales.CrearCarta(cartaInfo[0], cartaInfo[1]);
+            }
+            
+            while(continuar) {
+                System.out.println("Escoja un numero: ");
+                System.out.println("1. Guarda una carta en tu coleccion");
+                System.out.println("2. Que tipo de carta es...");
+                System.out.println("3. Mostrar mis cartas");
+                System.out.println("4. Mostrar mis cartas por tipo");
+                System.out.println("5. Mostrar todas las cartas");
+                System.out.println("6. Mostrar todas las cartas por tipo");
+                System.out.println("7. Salir");
+                String opcion = read.next();
+                
+                if (opcion.equals("1")) {
+                    System.out.println("Ingrese el nombre de la carta que desea agregar:");
+                    read.nextLine();
+                    String agregarCarta = read.nextLine();
+                    
+                    Boolean existe = cartasTotales.CartaExistente(agregarCarta);
+                    
+                    if (existe) {
+                        Cartas carta = cartasTotales.getCarta(agregarCarta);
+                        coleccion.AgregarCartas(carta);
+                    } else {
+                        System.out.println("Esta carta no existe.");
+                    }
+                    
+                } else if (opcion.equals("2")) {
+                    System.out.println("Ingrese nombre de carta para consultar el tipo de carta:");
+                    read.nextLine();
+                    String query = read.nextLine();
+                    System.out.println(query);
+                    System.out.println(cartasTotales.MostrarCarta(query));
+                    
+                } else if (opcion.equals("3")) {
+                    coleccion.MostrarTodasLasCartas();
+                } else if (opcion.equals("4")) {
+                    coleccion.mostrarCartasPorTipo();
+                } else if (opcion.equals("5")) {
+                    cartasTotales.MostrarTodasLasCartas();
+                } else if (opcion.equals("6")) {
+                    cartasTotales.mostrarCartasPorTipo();
+                } else if (opcion.equals("7")) {
+                    continuar = false;
+                }
+            }
+        }
+    }
 }
