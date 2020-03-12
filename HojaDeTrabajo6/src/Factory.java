@@ -11,14 +11,14 @@ public class Factory {
 
     public Factory() {
     }
-    public static Map<String, Cartas> obtenerMap(String opcion){
+    public static Map<String, String[]> obtenerMap(String opcion){
         switch (opcion){
             case "1":
-                return new HashMap<String, Cartas>();
+                return new HashMap<>();
             case "2":
-                return new HashMap<String, Cartas>();
+                return new HashMap<>();
             case "3":
-                return new LinkedHashMap<String, Cartas>();
+                return new LinkedHashMap<>();
             default:
                 return null;
         }

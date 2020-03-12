@@ -42,21 +42,25 @@ public class Main {
             //Leer el archivo
             ArrayList<String> cartas = new ArrayList<>();
             try {
-                Stream<String> lines;
+                /**Stream<String> lines;
                 lines = Files.lines(Paths.get("cards_desc.txt"), StandardCharsets.UTF_8);
                 lines.forEach(cartas::add);
-                /**try (BufferedReader abc = new BufferedReader(new FileReader("cards_desc.txt"))) {
+                * */
+                try (BufferedReader abc = new BufferedReader(new FileReader("cards_desc.txt"))) {
                     while(abc.ready()){
-                        cartas.add(abc.readLine());
+                        String datos = abc.readLine();
+                        cartas.add(datos);
                     }
+                    /**
                     while((line = abc.readLine()) != null) {
                         cartas.add(line);
                     }
+                    * */
                     abc.close();
                     //Stream<String> lines;
                     //lines = Files.lines(Paths.get("cards_desc.txt"), StandardCharsets.UTF_8);
                     //lines.forEach(cartas::add);
-                }*/
+                }
             } catch (IOException e) {
                 System.out.println("Ha ocurrido un error");
             }
