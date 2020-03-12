@@ -35,10 +35,14 @@ public class Main {
         
         mapa1 = Factory.obtenerMap(tipoM);
         mapa2 = Factory.obtenerMap(tipoM);
-        if (mapa1 != null && mapa2 != null){
+        cartasTotales.AsignarMapa(mapa1);
+        coleccion.AsignarMapa(mapa2);
+        /**
+        if (mapa1 == null && mapa2 == null){
             cartasTotales.AsignarMapa(mapa1);
             coleccion.AsignarMapa(mapa2);
-            
+        }
+        * */
             //Leer el archivo
             ArrayList<String> cartas = new ArrayList<>();
             try {
@@ -114,6 +118,6 @@ public class Main {
                     continuar = false;
                 }
             }
-        }
+        
     }
 }

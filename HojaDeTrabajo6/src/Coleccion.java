@@ -57,6 +57,7 @@ public class Coleccion {
         System.out.println("Todas las cartas son: ");
         for(Map.Entry<String, Cartas> ejemplo1 :carta.entrySet()){
             System.out.println("Nombre Carta: "+ ejemplo1.getKey() + " Tipo de Carta: "+ ejemplo1.getValue().getTipo() + " y la cantidad de cartas es: "+ ejemplo1.getValue().getCantidad());
+            //System.out.println("Funciona");
         }
         System.out.println(" ");
     }
@@ -115,7 +116,11 @@ public class Coleccion {
     * @param tipo 
     */
     public void CrearCarta(String nombre, String tipo) {
-        carta.put(nombre, new Cartas(nombre, tipo, 1));
+        Cartas nuevaCarta = new Cartas(nombre,tipo, 1);
+        //carta.put(nombre, new Cartas(nombre, tipo, 1));
+        carta.put(nombre, nuevaCarta);
+        //System.out.println(nuevaCarta.getTipo());
+        
     }
     /**
      * 
